@@ -520,3 +520,201 @@ Copy code
 var addresses = Map<String, Address>();
 var counts = Set<int>();
 💡 Cú pháp literal giúp bạn dùng được spread (...), null-spread (...?), và if/for trong collection.
+# 🧭 Effective Dart: Design
+
+Hướng dẫn các quy tắc thiết kế API trong Dart — giúp code nhất quán, dễ hiểu và dễ dùng.
+
+---
+
+## 🏷️ Names (Đặt tên)
+
+### ✅ DO: Sử dụng thuật ngữ nhất quán  
+Dùng **cùng một tên cho cùng một khái niệm** trong toàn bộ code.  
+Nếu đã có chuẩn trong thư viện hoặc trong ngữ cảnh người dùng quen thuộc, **hãy tuân theo**.
+
+**✅ Tốt**
+```dart
+pageCount         // Trường dữ liệu.
+updatePageCount() // Liên quan tới pageCount.
+toSomething()     // Theo chuẩn Iterable.toList().
+asSomething()     // Theo chuẩn List.asMap().
+Point             // Tên phổ biến, dễ hiểu.
+```
+
+**❌ Xấu**
+```dart
+renumberPages()      // Không nhất quán với pageCount.
+convertToSomething() // Không theo quy ước toX().
+wrappedAsSomething() // Không theo quy ước asX().
+Cartesian            // Khó hiểu, ít quen thuộc.
+```
+
+> 🎯 **Mục tiêu:** Tận dụng kiến thức có sẵn của người dùng, tránh khiến họ phải học lại.
+
+---
+
+### ⚠️ AVOID: Viết tắt không cần thiết  
+Chỉ viết tắt khi **từ viết tắt phổ biến hơn bản đầy đủ**, và viết hoa đúng quy tắc.
+
+**✅ Tốt**
+```dart
+pageCount
+buildRectangles
+IOStream
+HttpRequest
+```
+
+**❌ Xấu**
+```dart
+numPages    // “Num” là viết tắt không cần thiết.
+buildRects
+InputOutputStream
+HypertextTransferProtocolRequest
+```
+
+---
+
+### 💡 PREFER: Danh từ mô tả nên đặt **cuối cùng**  
+Từ cuối cùng nên là danh từ chính mô tả đối tượng, các từ trước có thể là tính từ.
+
+**✅ Tốt**
+```dart
+pageCount             // Đếm trang.
+ConversionSink        // Nơi chuyển đổi.
+ChunkedConversionSink // Loại ConversionSink theo khối.
+CssFontFaceRule       // Quy tắc font CSS.
+```
+
+**❌ Xấu**
+```dart
+numPages
+CanvasRenderingContext2D
+RuleFontFaceCss
+```
+
+---
+
+### 💬 CONSIDER: Khi không chắc, thử đọc code như câu tự nhiên  
+Viết code rồi đọc lại xem có tự nhiên không.
+
+**✅ Tốt**
+```dart
+if (errors.isEmpty) { ... }          // “Nếu danh sách lỗi trống...”
+subscription.cancel();               // “Huỷ đăng ký!”
+monsters.where((m) => m.hasClaws);   // “Lấy quái có móng vuốt.”
+```
+
+**❌ Xấu**
+```dart
+if (errors.empty) { ... }
+subscription.toggle();
+monsters.filter((m) => m.hasClaws);
+```
+
+> ❌ Tránh thêm từ “the”, “of”, hoặc viết câu quá dài chỉ để đọc giống ngữ pháp tiếng Anh.
+
+---
+
+### 🧱 PREFER: Dùng **cụm danh từ** cho thuộc tính hoặc biến không-boolean  
+Nếu thuộc tính mô tả **“cái gì là gì”**, hãy dùng danh từ.
+
+**✅ Tốt**
+```dart
+list.length
+context.lineWidth
+quest.rampagingSwampBeast
+```
+
+**❌ Xấu**
+```dart
+list.deleteItems
+```
+
+---
+
+### ⚙️ PREFER: Dùng **cụm động từ không mệnh lệnh** cho biến hoặc thuộc tính boolean  
+Tên boolean thường được dùng trong điều kiện, nên cần **đọc tự nhiên**.
+
+**✅ Tốt**
+```dart
+isEmpty
+hasElements
+canClose
+closesWindow
+canShowPopup
+hasShownPopup
+```
+
+**❌ Xấu**
+```dart
+empty
+withElements
+closeable
+closingWindow
+showPopup
+```
+
+> ❗ Tránh đặt tên boolean như mệnh lệnh (`showPopup` nghe như “thực thi hành động”).  
+> Boolean chỉ nên **diễn tả trạng thái**, không thực hiện hành động.
+
+---
+
+### ✂️ CONSIDER: Lược bỏ động từ trong **tên tham số boolean**
+
+Với tham số boolean đặt tên trong hàm, bỏ động từ giúp code gọn và dễ đọc hơn.
+
+**✅ Tốt**
+```dart
+Isolate.spawn(entryPoint, message, paused: false);
+var copy = List.from(elements, growable: true);
+var regExp = RegExp(pattern, caseSensitive: false);
+```
+
+---
+
+### ☯️ PREFER: Dùng tên **tích cực (positive)** cho boolean  
+Tránh tên mang nghĩa phủ định (`isNotEmpty`, `isDisabled`, v.v.) nếu có thể.  
+Điều này giúp tránh double negation trong điều kiện.
+
+**✅ Tốt**
+```dart
+if (socket.isConnected && database.hasData) {
+  socket.write(database.read());
+}
+```
+
+**❌ Xấu**
+```dart
+if (!socket.isDisconnected && !database.isEmpty) {
+  socket.write(database.read());
+}
+```
+
+> ⚠️ Ngoại lệ: Nếu hầu hết trường hợp người dùng cần dùng **phủ định**, có thể chọn dạng negative.
+
+---
+
+### 🧾 PREFER: Dùng **động từ mệnh lệnh** cho hàm có tác dụng phụ  
+Khi hàm **thực hiện hành động** hoặc **thay đổi trạng thái**, hãy dùng động từ chỉ hành động.
+
+**✅ Tốt**
+```dart
+list.add('element');
+queue.removeFirst();
+window.refresh();
+```
+
+---
+
+### 📦 PREFER: Dùng **cụm danh từ hoặc động từ phi mệnh lệnh** cho hàm trả về giá trị  
+Nếu hàm **trả về kết quả**, không nên nghe như lệnh hành động.
+
+**✅ Tốt**
+```dart
+var element = list.elementAt(3);
+var first = list.firstWhere(test);
+var char = string.codeUnitAt(4);
+```
+
+> 💬 Ví dụ như `take()` hay `split()` vẫn được — vì dễ hiểu và có nghĩa logic, dù là động từ.
+
