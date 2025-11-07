@@ -1,7 +1,5 @@
 
-# 🎨 Hướng dẫn Quy ước Đặt tên & Nhập khẩu trong Flutter/Dart
-
-> _Bản tiếng Việt có định dạng đẹp, kèm ví dụ tô màu (syntax highlighting) để dễ đọc trên GitHub/GitLab/VS Code._
+# 🎨 Hướng dẫn Quy ước Đặt tên trong Flutter/Dart
 
 ---
 
