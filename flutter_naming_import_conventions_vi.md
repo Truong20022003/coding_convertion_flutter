@@ -1,3 +1,32 @@
+# 📖 MỤC LỤC
+
+1. [🎨 Hướng dẫn Quy ước Đặt tên trong Flutter/Dart](#-hướng-dẫn-quy-ước-đặt-tên-trong-flutterdart)
+   1.1. [✅ Class / Enum / Typedef / Type Parameter (UpperCamelCase)](#-do-đặt-tên-uppercamelcase-cho-class--enum--typedef--tham-số-kiểu)
+   1.2. [📁 Quy ước tên Package & Tên File](#-quy-ước-tên-package--tên-file)
+   1.3. [🧩 Alias import (lowercase_with_underscores)](#-do-tiền-tố-alias-import-dùng-lowercase_with_underscores)
+   1.4. [🧱 Members / Variables / Parameters (lowerCamelCase)](#-tên-members--top-level-definitions--variables--parameters--named-args-dùng-lowercamelcase)
+   1.5. [🧷 Hằng số (lowerCamelCase)](#-ưu-tiên-hằng-số-đặt-tên-lowercamelcase)
+   1.6. [🔤 Viết hoa từ viết tắt (như Nasa, Uri...)](#-nên-viết-hoa-từ-viết-tắt-dài-hơn-hai-chữ-cái-như-từ-bình-thường)
+   1.7. [🧰 Callback không dùng tới](#-ưu-tiên-dùng-tham-số-ký-tự-đại-diện-cho-callback-không-dùng-tới)
+   1.8. [🚫 Không dùng tiền tố chữ cái](#-không-dùng-tiền-tố-chữ-cái-hungarian-notation)
+   1.9. [📚 Không đặt tên thư viện tường minh](#-không-đặt-tên-thư-viện-một-cách-tường-minh)
+   1.10. [📦 Thứ tự Imports/Exports](#-thứ-tự-importsexports)
+   1.11. [💡 Tip: Bật rule trong analysis_options.yaml](#-tip-bạn-có-thể-bật-các-rule-tương-ứng-trong-analysis_optionsyaml)
+
+2. [🧾 Effective Dart: Formatting, Comments, Null, Strings & Design](#-effective-dart-formatting-comments-null-strings--design)
+   2.1. [🧾 Định dạng (Formatting)](#-định-dạng-formatting)
+   2.2. [💬 Bình luận & Ghi chú trong code](#-bình-luận--ghi-chú-trong-code-comments)
+   2.3. [🌫️ Null](#-null)
+   2.4. [✅ Code Quality Rules](#-code-quality-rules)
+   2.5. [🧵 Chuỗi (Strings)](#-chuỗi-ký-tự-strings)
+   2.6. [💬 Chuỗi & Tập hợp (Strings & Collections)](#-chuỗi--tập-hợp-strings--collections)
+   2.7. [🏷️ Effective Dart: Design](#-effective-dart-design)
+   2.8. [✅ Tóm tắt quy tắc ngắn gọn](#-tóm-tắt-ngắn-gọn)
+
+3. [📚 References](#-references)
+
+---
+
 
 # 🎨 Hướng dẫn Quy ước Đặt tên trong Flutter/Dart
 
